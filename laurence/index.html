@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Laurence Bernier</title>
+  <style>
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg: #0e0e11;
+      --surface: #16161a;
+      --border: #2a2a30;
+      --text: #e8e8ed;
+      --text-muted: #8888a0;
+      --accent: #6c8cff;
+      --accent-glow: rgba(108, 140, 255, 0.12);
+    }
+
+    body {
+      font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 640px;
+      width: 100%;
+    }
+
+    /* Header */
+    .header {
+      margin-bottom: 3rem;
+    }
+
+    .header h1 {
+      font-size: 2.25rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.5rem;
+    }
+
+    .header .tagline {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      font-weight: 400;
+    }
+
+    .header .tagline span {
+      color: var(--accent);
+    }
+
+    /* Divider */
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 2rem 0;
+    }
+
+    /* Cards */
+    .cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .card:hover {
+      border-color: var(--accent);
+      box-shadow: 0 0 20px var(--accent-glow);
+    }
+
+    .card .icon {
+      font-size: 1.5rem;
+      margin-bottom: 0.75rem;
+      display: block;
+    }
+
+    .card h2 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.35rem;
+    }
+
+    .card p {
+      color: var(--text-muted);
+      font-size: 0.875rem;
+      line-height: 1.5;
+    }
+
+    /* About section */
+    .about {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.75rem;
+      margin-bottom: 2rem;
+    }
+
+    .about h2 {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+
+    .about p {
+      font-size: 0.95rem;
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      padding-top: 1rem;
+    }
+
+    .footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Responsive */
+    @media (max-width: 480px) {
+      .cards {
+        grid-template-columns: 1fr;
+      }
+
+      .header h1 {
+        font-size: 1.75rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Laurence Bernier</h1>
+      <p class="tagline">Swimmer · Golfer · <span>Problem solver</span></p>
+    </div>
+
+    <div class="cards">
+      <div class="card">
+        <span class="icon">🏊</span>
+        <h2>Swimming</h2>
+        <p>Competitive swimmer — chasing PRs and pushing limits in the pool.</p>
+      </div>
+      <div class="card">
+        <span class="icon">⛳</span>
+        <h2>Golf</h2>
+        <p>On the school golf team — precision, patience, and a good walk.</p>
+      </div>
+      <div class="card">
+        <span class="icon">🧮</span>
+        <h2>Math</h2>
+        <p>Love diving into problems, from algebra to number theory.</p>
+      </div>
+      <div class="card">
+        <span class="icon">🧩</span>
+        <h2>Patterns</h2>
+        <p>Drawn to puzzles, sequences, and finding structure in the noise.</p>
+      </div>
+    </div>
+
+    <div class="about">
+      <h2>About</h2>
+      <p>
+        I'm Laurence — a student-athlete who spends time between the pool, the course, and a good math problem.
+        I enjoy the discipline that comes with competitive sports and the creativity that comes with recognizing patterns.
+        Always looking for the next challenge.
+      </p>
+    </div>
+
+    <div class="footer">
+      <p>&copy; 2026 Laurence Bernier</p>
+    </div>
+  </div>
+</body>
+</html>
