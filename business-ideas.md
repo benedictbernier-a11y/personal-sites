@@ -6,159 +6,152 @@ Read through all of these. Talk about them. Argue about them. Then pick one by t
 
 ---
 
-## 1. Swim Meet & Sports Event Photography
+## 1. Reselling / Flipping (Thrift to eBay/Mercari)
 
-Show up to swim meets, climbing comps, and school sporting events. Shoot high-quality action photos. Sell digital photo packages to parents.
+Buy underpriced items at thrift stores, garage sales, and estate sales. Resell on eBay, Mercari, Poshmark, or Facebook Marketplace at a markup. Focus on a niche you can learn fast — sneakers, vintage tees, electronics, books, or sports equipment.
 
-**What you'd charge:** $15-25 per photo set, or $50-75 for a full meet package per family
+**What you'd charge:** Varies — typical margins are 2-5x what you pay
 
-**Startup costs:** $50-150 (memory cards, editing software — camera may already be available)
+**Startup costs:** $100-200 (initial inventory purchases)
 
-**Why it could work:** Parents at swim meets are desperate for good action shots. Laurence already knows the swim community. Benedict already knows how to shoot. You have a built-in audience before you take a single photo.
+**Why it could work:** San Antonio has incredible thrift stores and garage sale culture. You can start same-day. The learning curve is real but short — apps like eBay's barcode scanner tell you what things sell for instantly. Once you learn to spot value, a $3 Goodwill find becomes a $40 sale.
 
-**First dollar timeline:** 1-2 weeks (shoot your first event)
+**First dollar timeline:** Same week (list items the day you buy them)
 
-**Benedict's role:** Shooting, editing, creative direction
-**Laurence's role:** Pricing strategy, gallery management, sales tracking, identifying which meets to target
+**Benedict's role:** Product photography, listing creation, sourcing
+**Laurence's role:** Pricing research, inventory tracking, profit/loss analysis, identifying which categories have the best margins
 
-**What you'd build with Claude Code:** Online photo gallery with payment, watermarking automation, booking system, financial tracker
-
----
-
-## 2. Student Portraits & Prom Photos
-
-Offer portrait sessions to classmates — prom photos, senior portraits, friend group shoots, couples. At a price that massively undercuts studios.
-
-**What you'd charge:** $40-75 per session (studios charge $200-400+)
-
-**Startup costs:** $50-100 (reflector, simple backdrop, memory cards)
-
-**Why it could work:** Prom season is right now. Graduation is weeks away. Your classmates are your customers, and word of mouth in a school spreads fast. San Antonio has no shortage of great shooting locations.
-
-**First dollar timeline:** Days — post sample work, bookings come in
-
-**Benedict's role:** Shooting, editing, location scouting, creative direction
-**Laurence's role:** Booking system, scheduling, pricing experiments, tracking which marketing posts drive the most bookings
-
-**What you'd build with Claude Code:** Booking website, scheduling system, client CRM, invoicing, portfolio site
+**What you'd build with Claude Code:** Inventory tracker, profit calculator, price comparison tool, listing templates
 
 ---
 
-## 3. Social Media Content for Local Businesses
+## 2. AI Homework Helper / Study Guide Service
 
-Small businesses — climbing gyms, restaurants, shops, studios — need social media content but can't afford agencies. Offer monthly content packages at a price no agency would touch.
+Build and sell a subscription or per-use AI-powered study tool for your classmates. Create custom study guides, practice tests, and flashcard sets for specific classes at your school — tailored to your actual teachers' tests and curricula.
 
-**What you'd charge:** $150-300/month per client for 10-15 photos + 4-8 short videos
+**What you'd charge:** $5-10/month per student, or $3-5 per custom study guide
 
-**Startup costs:** $0-50 (phone + camera you already have)
+**Startup costs:** $20-50 (API costs, domain name)
 
-**Why it could work:** Every small business knows they need better social media. Almost none of them have the time or skill to do it. Two of you means one creates content while the other tracks what's actually working — that analytics layer is the value-add that makes you more than "kids with cameras."
+**Why it could work:** Generic AI tools exist but they don't know what Mrs. Johnson's AP Bio test covers. You do. The value is curation and specificity — study materials built for YOUR school's classes. Students will pay to save hours of studying, especially before exams.
 
-**First dollar timeline:** 1-2 weeks (pitch to businesses you already go to)
+**First dollar timeline:** 1-2 weeks (build it, launch before the next test cycle)
 
-**Benedict's role:** Content creation — photo, video, visual storytelling
-**Laurence's role:** Performance analytics, monthly reports showing engagement data, client communication
+**Benedict's role:** UI/UX design, marketing, gathering intel on what classes to target
+**Laurence's role:** Building the tool with Claude Code, pricing, distribution strategy, tracking usage and retention
 
-**What you'd build with Claude Code:** Client dashboard, automated analytics reports, content calendars, pitch deck, portfolio site
-
-**Note:** This one requires walking into a business and making a pitch. Claude Code can help you prepare every word of that conversation in advance.
+**What you'd build with Claude Code:** The entire product — a web app that generates study guides, practice questions, and flashcards based on course-specific content
 
 ---
 
-## 4. Print-on-Demand School Merch
+## 3. Pool Cleaning & Maintenance
 
-Design and sell custom merchandise — school spirit wear, swim team gear, club shirts, senior class hoodies, memes-on-shirts. No inventory. A service like Printful prints and ships each order for you.
+Show up once a week, skim debris, brush walls, vacuum the bottom, check and balance chemicals, clean the filter. Homeowners hate doing it and will gladly pay someone else.
 
-**What you'd charge:** $22-35 per item (your cost is $10-20, you keep the margin)
+**What you'd charge:** $100-175/month per pool (weekly service), $75-150 for one-time cleanups
 
-**Startup costs:** $25-50 (order a few samples to photograph)
+**Startup costs:** $150-300 (telescoping pole, skimmer net, pool brush, vacuum head + hose, water test kit, basic chemicals)
 
-**Why it could work:** Your classmates are your customers. If you nail a design that people want to wear, it spreads fast. School clubs and teams need custom gear constantly. No inventory risk since items are printed on demand.
+**Why it could work:** San Antonio is loaded with backyard pools, and pool owners need weekly maintenance year-round but especially heading into summer. Laurence's swim background gives instant credibility — you literally live in pools. Land 10 weekly clients at $125/month = $1,250/month in recurring revenue for a few hours of work per week. Neighbors with pools cluster together, so one client turns into three on the same street.
 
-**First dollar timeline:** Within a week if a design resonates
+**First dollar timeline:** 3-7 days (post on Nextdoor, knock on doors in neighborhoods with pools)
 
-**Benedict's role:** Design, brand identity, product photography
-**Laurence's role:** Store management, pricing optimization, analyzing which designs sell and why, managing orders
+**Benedict's role:** Marketing, route logistics, operations
+**Laurence's role:** Water chemistry (you already understand this from swimming), client management, scheduling, pricing
 
-**What you'd build with Claude Code:** Online storefront, order tracking system, profit calculator, design mockup tools
+**What you'd build with Claude Code:** Client management system, route optimizer, chemical tracking log, recurring billing system, service checklist app
 
----
-
-## 5. Swim Coaching for Kids
-
-Private or small-group swim lessons for younger kids. Laurence is a competitive swimmer on two teams — parents will pay premium for instruction from someone their kid looks up to.
-
-**What you'd charge:** $30-50/hour per student, or $25/hour each for groups of 2-3
-
-**Startup costs:** $30-50 (basic teaching aids, possibly pool access fees)
-
-**Why it could work:** San Antonio is hot. Summer is coming. Every parent wants their kid to swim better or learn to swim. A competitive teenage swimmer is the perfect instructor — old enough to be skilled, young enough to be relatable.
-
-**First dollar timeline:** Could book first lessons within days through swim team parent networks. Peak season starts as weather warms up.
-
-**Benedict's role:** All marketing — flyers, social media content, photos/videos of lessons for promotion
-**Laurence's role:** Teaching, curriculum design, student progress tracking
-
-**What you'd build with Claude Code:** Booking and scheduling system, student progress tracker, parent communication system, marketing site, financial tracking
-
-**Note:** Check whether community pools or your neighborhood pool allow private instruction. Many do. You may want Dad listed as the official business entity since you're minors.
+**Note:** Texas doesn't require a license for basic pool cleaning and chemical balancing. For equipment repair or more advanced work, licensing may apply — stick to cleaning and maintenance to start. Dad may need to be the official business entity since you're minors.
 
 ---
 
-## 6. Film Photography Workshops
+## 4. Vintage Camera Repair & Restoration
 
-Teach people to shoot and develop film. Film photography is genuinely trendy right now — especially with teens and young adults. This is an "experience" product, which means people pay more for it.
+Buy broken or non-functional film cameras cheap (estate sales, eBay "for parts" listings, thrift stores, Facebook Marketplace). Fix common issues — stuck shutters, light seal replacements, lens cleaning, battery conversions, stuck film advance. Resell working cameras at full market value, or offer repair services to other film shooters.
 
-**What you'd charge:** $45-65 per person, groups of 4-6, 2-hour sessions
+**What you'd charge:**
+- Repair services: $30-75 for common fixes (light seals, shutter cleaning, lens haze), $75-150 for more involved work
+- Flip margin: Buy broken for $10-40, sell working for $60-200+ depending on the model (some go for $300-500+)
 
-**Startup costs:** $200-300 (bulk film, developing chemicals, cheap point-and-shoot cameras for participants)
+**Startup costs:** $100-200 (precision screwdriver set, spudgers, light seal foam/cord, lens cleaning supplies, a few broken cameras to practice on)
 
-**Why it could work:** No one else in San Antonio is offering this at a price teens can afford. Could sell through school, Instagram, and word of mouth. Each workshop is profitable from the first one if you fill 4+ seats.
+**Why it could work:** Film photography is booming — prices on working vintage cameras have 2-3x'd in the last few years. But there are very few people who actually repair them, especially at affordable prices. Most repair shops charge $100+ and have 4-8 week backlogs. YouTube has excellent teardown tutorials for almost every popular camera model. The skill compounds — once you learn to fix one SLR, you can fix most of them. And there's a built-in buy-low/sell-high model: broken cameras are everywhere and cheap, working ones command serious premiums.
 
-**First dollar timeline:** 2-3 weeks (need to build awareness and book first session)
+**First dollar timeline:** 1-2 weeks (buy a few broken cameras, fix them, list them)
 
-**Benedict's role:** Teaching the craft, running the workshops, creating promotional content
-**Laurence's role:** Registration system, supply inventory management, pricing, tracking profitability per session
+**Benedict's role:** The repairs, sourcing broken cameras, product photography for listings
+**Laurence's role:** Pricing research (what models are worth fixing vs. not), inventory tracking, sales platforms, profit analysis per camera model
 
-**What you'd build with Claude Code:** Registration website, inventory tracker, automated confirmation emails, marketing site, financial dashboard
+**What you'd build with Claude Code:** Inventory system tracking buy price / repair cost / sell price per unit, repair knowledge base, eBay/Mercari listing manager, profit dashboard
 
----
+**Models worth learning first:** Canon AE-1, Pentax K1000, Minolta X-700, Olympus OM-1, Nikon FE/FM series — these are the highest-demand, most-repairable cameras with the best margins.
 
-## 7. Peer Tutoring Network
-
-Organize and sell access to paid study sessions and tutoring. Start by tutoring in your own strong subjects. Then recruit other strong students and take a 20% platform fee for connecting tutors with students.
-
-**What you'd charge:** $15-25/hour for tutoring. If you build the platform model, you take 20% of every session.
-
-**Startup costs:** $0-25
-
-**Why it could work:** AP exams are in May. Finals are coming. Every student in your school knows someone who needs help. If you build the matching system, you make money every time anyone tutors — not just when you personally tutor.
-
-**First dollar timeline:** Fast — especially if you launch around exam season
-
-**Benedict's role:** Tutor recruitment, marketing, brand building
-**Laurence's role:** The matching system, scheduling, analytics on which subjects have highest demand, pricing strategy
-
-**What you'd build with Claude Code:** Matching platform, scheduling system, payment tracking, tutor rating system, demand analytics
+**Risk:** Some cameras aren't worth fixing (electronic shutter failures, fungus-eaten lenses). You'll waste money on a few duds while learning. Budget for that.
 
 ---
 
-## 8. Event & Party Photography
+## 5. Watch Servicing & Flipping
 
-Quinceañeras, birthday parties, family reunions, church events, school dances. San Antonio has a massive event culture. Affordable event photography is always in demand.
+Buy non-running or rough-condition mechanical watches cheap. Service them — clean movements, replace gaskets/crystals, regulate timing, polish cases. Resell working watches at a premium, or offer basic servicing to collectors and everyday watch wearers.
 
-**What you'd charge:** $100-200 for a 2-3 hour event, delivered as a digital gallery
+**What you'd charge:**
+- Service fees: $40-80 for basic work (battery swaps, crystal replacements, gasket/pressure testing), $80-200 for movement cleaning and regulation
+- Flip margin: Buy broken/dirty for $10-50, sell serviced for $75-400+ depending on brand and model
 
-**Startup costs:** $50-150 (same as other photography options)
+**Startup costs:** $200-400 (case back opener set, spring bar tools, watch movement holder, hand press for crystals, loupe/magnifier, cleaning solution, assorted gaskets and crystals)
 
-**Why it could work:** Quinceañeras alone are a huge market in San Antonio, and professional photographers charge $500-2000+. You're not competing with them on quality — you're offering a price point that families who can't afford the pros will jump at. One event per weekend = $400-800/month.
+**Why it could work:** Similar dynamic to cameras — the vintage/mechanical watch market has exploded but actual watchmakers are aging out and booked for months. A basic service at a real watchmaker costs $150-300+. Most "broken" watches just need a clean, new battery, or a gasket. The buy-low/sell-high model works well on eBay and r/Watchexchange. Seiko, Citizen, Orient, and vintage Soviet watches (Vostok, Raketa) are cheap to source and have a passionate buyer base.
 
-**First dollar timeline:** 1-2 weeks with outreach through family, church, or school networks
+**First dollar timeline:** 1-2 weeks (buy a few cheap watches, service them, list them)
 
-**Benedict's role:** Shooting and editing
-**Laurence's role:** Client booking, event logistics, gallery management, financial tracking
+**Benedict's role:** Sourcing, the hands-on repair work, product photography for listings
+**Laurence's role:** Market research on which brands/models are worth buying, pricing, inventory tracking, profit-per-watch analysis
 
-**What you'd build with Claude Code:** Portfolio site, booking system, online gallery with delivery, invoicing, client CRM
+**What you'd build with Claude Code:** Inventory tracker (buy cost / parts cost / sell price per watch), marketplace listing templates, profit dashboard, knowledge base of common repairs by model
+
+**Models worth learning first:** Seiko 7S26/NH35 automatics (bulletproof and simple), vintage Timex mechanicals (cheap practice), Vostok Amphibia (huge collector market), Orient Bambino (easy flips). Avoid vintage Swiss until you have serious skills — those movements are unforgiving.
+
+**Risk:** Higher skill ceiling than cameras. Tiny parts, easy to damage. You'll destroy a few cheap watches while learning — that's the tuition. Start with $10-20 beaters, not a $200 Seiko diver. Also, quartz watches are easy money (battery swaps, gasket replacements) while you build mechanical skills.
+
+---
+
+## Camera Repair vs. Watch Servicing — Pros & Cons
+
+### Vintage Camera Repair
+
+**Pros:**
+- Lower startup cost ($100-200)
+- Easier to learn — YouTube teardowns for every popular model
+- Bigger physical parts, more forgiving to work on
+- Film photography market is hot right now
+- Light seals and shutter cleaning are quick wins you can learn in a day
+- Broken cameras are everywhere (thrift stores, estate sales)
+
+**Cons:**
+- Some failures are unfixable (electronic shutters, severe fungus)
+- Film camera demand could cool off as the trend fades
+- Lower ceiling per unit — most cameras top out at $200-300 resale
+- Need decent workspace but nothing extreme
+
+### Watch Servicing
+
+**Pros:**
+- Higher earning potential per unit — serviced watches can sell for $200-500+
+- Deeper skill moat — fewer people can do it, so less competition
+- Watch market is more stable and established than the film camera trend
+- Quartz battery swaps are dead simple and profitable while you learn mechanical
+- Tiny inventory — watches take up almost no space
+- Year-round demand, not trend-dependent
+
+**Cons:**
+- Higher startup cost ($200-400)
+- Steeper learning curve — tiny parts, easy to damage
+- You'll destroy a few watches while learning (budget $50-100 in "tuition")
+- Need magnification, good lighting, steady hands
+- Mechanical movements are genuinely complex — months to get confident
+- One slip can turn a $100 watch into parts
+
+**Bottom line:** Cameras are the easier, cheaper, faster start. Watches pay more long-term but demand more patience and skill upfront. Starting with cameras and graduating to watches over time is a natural path.
 
 ---
 
@@ -172,6 +165,6 @@ Don't overthink it. Ask yourselves three questions:
 
 If you're stuck between two, go with the one that gets you paid fastest. You can always add the other one later.
 
-You can also combine elements. Want to do swim meet photography AND student portraits? That's just a photography business with two service lines. Want to do merch AND content for local businesses? Those could be bundled.
+You can also combine elements. Pool cleaning gives you recurring revenue, reselling builds capital on the side, and the AI study guide is a scalable digital product. They don't compete for the same time slots.
 
 Pick by tonight. Tomorrow you build.
