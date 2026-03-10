@@ -155,6 +155,7 @@ Buy non-running or rough-condition mechanical watches cheap. Service them — cl
 
 ---
 
+<<<<<<< HEAD
 ## 6. Micro SaaS — One-Feature Web App
 
 Build a tiny web app that does one thing and charge $3-10/month. Examples: a client follow-up reminder tool, a receipt scanner for small businesses, a social media bio link page builder, a habit tracker with email nudges. The entire thing can be built in a weekend with Claude Code.
@@ -228,6 +229,61 @@ Package and sell curated prompt collections for ChatGPT, Midjourney, Claude, or 
 **Laurence's role:** Writing and testing the prompts, Gumroad/Etsy management, tracking sales
 
 **What you'd build with Claude Code:** Sales landing page, prompt testing automation, listing optimizer
+=======
+## 6. Drone Photography & Videography
+
+Buy a drone and offer aerial photos and video for real estate agents, event organizers, construction companies, roofers, and local businesses. Fly, shoot, edit, deliver.
+
+**What you'd charge:**
+- Real estate photos: $100-300 per property
+- Event coverage: $200-500+
+- Construction progress shots: $150-400 per visit (recurring work)
+- Roof/property inspections: $100-250
+- Social media content for businesses: $100-300 per session
+
+**Startup costs:** $300-800 (DJI Mini 2 SE at ~$300 for budget, DJI Mini 4 Pro at ~$760 for quality) + ~$175 for FAA Part 107 license test
+
+**Why it could work:** Not many people in your area have the skill yet, so competition is low. Real estate agents are your bread and butter — they always need listing photos and will send repeat business. One good relationship with an agent can mean weekly work. The footage doubles as content for your own social media, which brings in more clients. You can add services over time — virtual tours, 360° photos, video editing packages.
+
+**First dollar timeline:** 2-3 weeks (get licensed, practice flying, reach out to real estate agents)
+
+**Benedict's role:** Flying, shooting, editing footage, building a portfolio
+**Laurence's role:** Client outreach, pricing, scheduling, route planning, business operations
+
+**What you'd build with Claude Code:** Portfolio website, booking/scheduling system, client management tool, invoice generator, shot list templates per job type
+
+**Requirements:**
+- FAA Part 107 Remote Pilot Certificate (multiple-choice test, any age, ~$175)
+- Know your local airspace rules — no flying near airports, over crowds, above 400 feet
+- Insurance is smart ($500-1000/year) in case of crashes or property damage
+- Dad may need to be the official business entity since you're minors
+
+**Gear to start with:** DJI Mini series — under 250g so fewer regulations, great camera quality, ~30 min battery life per charge. Buy at least 2-3 extra batteries.
+
+**Risk:** Weather dependent — rain and wind ground you. Battery life limits shoots. Some areas have strict no-fly zones. Initial investment is higher than some other options, but the per-job revenue makes up for it fast.
+>>>>>>> 1e70a924974f3905a528f01225867e7e474e8b3c
+
+---
+
+## Finalist Comparison: Micro SaaS vs. Camera Repair
+
+| Criteria | Micro SaaS | Camera Repair | Edge |
+|---|---|---|---|
+| **Startup cost** | $0-15 | $100-200 | SaaS |
+| **Time to first dollar** | 2-4 weeks | 1-2 weeks | Camera |
+| **Revenue potential/mo** | $0-500+ (uncapped) | $200-600 (capped by hours) | SaaS (if it works) |
+| **Hours/week to run** | 5-10 build, then 2-3 | 10-15 ongoing | SaaS |
+| **Uses both skills** | Strong — design + code split | Strong — repair + business split | Tie |
+| **Customers you can name now** | Zero | eBay/Mercari buyers, local photo students, SA camera shops | Camera |
+| **Biggest risk** | Build it, nobody comes | Buy unfixable cameras | Camera (cheaper to fail) |
+| **Worst-case loss** | 3 weeks of time, $0 earned | $50-100 in dud cameras | Tie |
+| **Best-case month 1** | $50-100 (early adopters) | $200-400 (flip 5-8 cameras) | Camera |
+| **Best-case month 6** | $500-2000/mo passive | $600-1000/mo active | SaaS |
+| **Scalability** | Infinite — no marginal cost | Linear — tied to your hands | SaaS |
+| **Learning value** | Ship software, marketing, pricing | Mechanical repair, sourcing, resale | Tie |
+| **Fun factor** | Depends on the idea | Hands-on, tangible results | Personal preference |
+
+**Score: SaaS 4 / Camera 4 / Tie 3**
 
 ---
 
