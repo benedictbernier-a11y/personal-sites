@@ -155,6 +155,82 @@ Buy non-running or rough-condition mechanical watches cheap. Service them — cl
 
 ---
 
+## 6. Micro SaaS — One-Feature Web App
+
+Build a tiny web app that does one thing and charge $3-10/month. Examples: a client follow-up reminder tool, a receipt scanner for small businesses, a social media bio link page builder, a habit tracker with email nudges. The entire thing can be built in a weekend with Claude Code.
+
+**What you'd charge:** $3-10/month per user. 100 users at $5 = $500/month
+
+**Startup costs:** $0-15 (Vercel/Railway free tier, domain)
+
+**Why it could work:** Find a pain point in a subreddit or Facebook group, build the solution, post it there. Solve one problem perfectly rather than ten problems poorly.
+
+**First dollar timeline:** 1-3 weeks (build it in a weekend, launch on Reddit/Product Hunt)
+
+**Benedict's role:** UI/UX design, marketing, landing page
+**Laurence's role:** Building the app with Claude Code, pricing strategy, user analytics
+
+**What you'd build with Claude Code:** The entire product
+
+---
+
+## 7. Google Sheets / Excel Templates
+
+Build spreadsheets that solve real problems — budget trackers, inventory systems, workout logs, meal planners, wedding planners, small business bookkeeping. Sell on Etsy, Gumroad, or your own site.
+
+**What you'd charge:** $5-30 per template
+
+**Startup costs:** $0
+
+**Why it could work:** Business-focused templates sell for more. A "freelancer invoice + expense tracker" or "rental property calculator" can sell for $15-30. Personal finance templates are evergreen sellers. Zero fulfillment — auto-delivered digital file.
+
+**First dollar timeline:** 3-7 days (build templates, list on Etsy/Gumroad)
+
+**Benedict's role:** Visual design, making templates look clean and professional
+**Laurence's role:** Building the formulas and logic, Etsy/Gumroad store management, tracking which templates sell
+
+**What you'd build with Claude Code:** Landing page, listing optimizer, sales tracker
+
+---
+
+## 8. White-Label AI Chatbot for Small Businesses
+
+Build a simple AI chatbot (using Claude API) that answers FAQs for a small business — restaurant menus, store hours, booking questions. Embed it on their website. Charge a monthly fee.
+
+**What you'd charge:** $20-50/month per business
+
+**Startup costs:** $20-50 (API costs, hosting)
+
+**Why it could work:** Walk into a local business and show them a working demo on your phone. "This answers your customers' questions 24/7 so you don't have to." Build one, clone it for each client with different FAQ data. Minimal effort once configured — it runs itself.
+
+**First dollar timeline:** 1-2 weeks (build demo, pitch to a business you already go to)
+
+**Benedict's role:** Demo presentations, client relationships, marketing
+**Laurence's role:** Building and configuring the chatbot with Claude Code, API management, client onboarding
+
+**What you'd build with Claude Code:** The entire chatbot product, client dashboard, billing system
+
+---
+
+## 9. Sell Prompt Packs for AI Tools
+
+Package and sell curated prompt collections for ChatGPT, Midjourney, Claude, or Stable Diffusion. "50 prompts for stunning product photography" or "100 ChatGPT prompts for students." Sell on Gumroad or Etsy.
+
+**What you'd charge:** $3-12 per pack
+
+**Startup costs:** $0
+
+**Why it could work:** Prompt packs that target a specific job or use case sell best. "AI prompts for real estate agents" beats "general AI prompts." Bundle them nicely in a PDF with examples of outputs. Zero fulfillment — digital file, auto-delivered.
+
+**First dollar timeline:** 2-5 days (write prompts, design PDF, list on Gumroad)
+
+**Benedict's role:** PDF design, example output screenshots, marketing
+**Laurence's role:** Writing and testing the prompts, Gumroad/Etsy management, tracking sales
+
+**What you'd build with Claude Code:** Sales landing page, prompt testing automation, listing optimizer
+
+---
+
 ## How to Pick
 
 Don't overthink it. Ask yourselves three questions:
