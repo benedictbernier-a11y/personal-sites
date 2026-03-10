@@ -155,7 +155,6 @@ Buy non-running or rough-condition mechanical watches cheap. Service them — cl
 
 ---
 
-<<<<<<< HEAD
 ## 6. Micro SaaS — One-Feature Web App
 
 Build a tiny web app that does one thing and charge $3-10/month. Examples: a client follow-up reminder tool, a receipt scanner for small businesses, a social media bio link page builder, a habit tracker with email nudges. The entire thing can be built in a weekend with Claude Code.
@@ -229,8 +228,10 @@ Package and sell curated prompt collections for ChatGPT, Midjourney, Claude, or 
 **Laurence's role:** Writing and testing the prompts, Gumroad/Etsy management, tracking sales
 
 **What you'd build with Claude Code:** Sales landing page, prompt testing automation, listing optimizer
-=======
-## 6. Drone Photography & Videography
+
+---
+
+## 10. Drone Photography & Videography
 
 Buy a drone and offer aerial photos and video for real estate agents, event organizers, construction companies, roofers, and local businesses. Fly, shoot, edit, deliver.
 
@@ -261,7 +262,6 @@ Buy a drone and offer aerial photos and video for real estate agents, event orga
 **Gear to start with:** DJI Mini series — under 250g so fewer regulations, great camera quality, ~30 min battery life per charge. Buy at least 2-3 extra batteries.
 
 **Risk:** Weather dependent — rain and wind ground you. Battery life limits shoots. Some areas have strict no-fly zones. Initial investment is higher than some other options, but the per-job revenue makes up for it fast.
->>>>>>> 1e70a924974f3905a528f01225867e7e474e8b3c
 
 ---
 
