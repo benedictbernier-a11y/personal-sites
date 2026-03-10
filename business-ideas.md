@@ -155,6 +155,40 @@ Buy non-running or rough-condition mechanical watches cheap. Service them — cl
 
 ---
 
+## 6. Drone Photography & Videography
+
+Buy a drone and offer aerial photos and video for real estate agents, event organizers, construction companies, roofers, and local businesses. Fly, shoot, edit, deliver.
+
+**What you'd charge:**
+- Real estate photos: $100-300 per property
+- Event coverage: $200-500+
+- Construction progress shots: $150-400 per visit (recurring work)
+- Roof/property inspections: $100-250
+- Social media content for businesses: $100-300 per session
+
+**Startup costs:** $300-800 (DJI Mini 2 SE at ~$300 for budget, DJI Mini 4 Pro at ~$760 for quality) + ~$175 for FAA Part 107 license test
+
+**Why it could work:** Not many people in your area have the skill yet, so competition is low. Real estate agents are your bread and butter — they always need listing photos and will send repeat business. One good relationship with an agent can mean weekly work. The footage doubles as content for your own social media, which brings in more clients. You can add services over time — virtual tours, 360° photos, video editing packages.
+
+**First dollar timeline:** 2-3 weeks (get licensed, practice flying, reach out to real estate agents)
+
+**Benedict's role:** Flying, shooting, editing footage, building a portfolio
+**Laurence's role:** Client outreach, pricing, scheduling, route planning, business operations
+
+**What you'd build with Claude Code:** Portfolio website, booking/scheduling system, client management tool, invoice generator, shot list templates per job type
+
+**Requirements:**
+- FAA Part 107 Remote Pilot Certificate (multiple-choice test, any age, ~$175)
+- Know your local airspace rules — no flying near airports, over crowds, above 400 feet
+- Insurance is smart ($500-1000/year) in case of crashes or property damage
+- Dad may need to be the official business entity since you're minors
+
+**Gear to start with:** DJI Mini series — under 250g so fewer regulations, great camera quality, ~30 min battery life per charge. Buy at least 2-3 extra batteries.
+
+**Risk:** Weather dependent — rain and wind ground you. Battery life limits shoots. Some areas have strict no-fly zones. Initial investment is higher than some other options, but the per-job revenue makes up for it fast.
+
+---
+
 ## How to Pick
 
 Don't overthink it. Ask yourselves three questions:
