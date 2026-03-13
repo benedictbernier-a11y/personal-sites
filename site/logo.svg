@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <!-- Circle badge -->
+  <circle cx="200" cy="200" r="195" fill="#1E3932" />
+  <circle cx="200" cy="200" r="175" fill="none" stroke="#F2E8D5" stroke-width="2" />
+  <text x="200" y="195" text-anchor="middle" font-family="Impact, sans-serif" font-size="36" fill="#F2E8D5" letter-spacing="8">BACK FLASH</text>
+  <text x="200" y="235" text-anchor="middle" font-family="Impact, sans-serif" font-size="36" fill="#F2E8D5" letter-spacing="8">BROTHERS</text>
+</svg>
