@@ -461,6 +461,27 @@ nav .nav-links a.active {
   resize: vertical;
 }
 
+.contact-form .required {
+  color: var(--sienna);
+}
+
+.thank-you {
+  text-align: center;
+  padding: 48px 0;
+}
+
+.thank-you h2 {
+  font-size: 2rem;
+  margin-bottom: 12px;
+}
+
+.thank-you p {
+  color: var(--gray);
+  margin-bottom: 24px;
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
 .contact-info h3 {
   font-size: 1.3rem;
   margin-bottom: 16px;
