@@ -60,6 +60,71 @@
     .summary-card .value.positive { color: #2d8a4e; }
     .summary-card .value.negative { color: #d43b3b; }
 
+    /* Summary controls */
+    .summary-controls {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .toggle-group {
+      display: inline-flex;
+      background: #e8e8ed;
+      border-radius: 8px;
+      padding: 3px;
+    }
+
+    .toggle-group button {
+      padding: 0.35rem 1rem;
+      border: none;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      font-family: inherit;
+      cursor: pointer;
+      background: transparent;
+      color: #6e6e73;
+      transition: all 0.15s;
+    }
+
+    .toggle-group button.active {
+      background: #fff;
+      color: #1d1d1f;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+
+    .month-picker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .month-picker button {
+      width: 28px;
+      height: 28px;
+      border: 1px solid #d2d2d7;
+      border-radius: 6px;
+      background: #fff;
+      cursor: pointer;
+      font-size: 0.875rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #1d1d1f;
+      transition: background 0.15s;
+    }
+
+    .month-picker button:hover { background: #f0f0f5; }
+
+    .month-picker .month-label {
+      font-size: 0.875rem;
+      font-weight: 500;
+      min-width: 120px;
+      text-align: center;
+    }
+
     /* Form */
     .add-form {
       background: #fff;
@@ -223,21 +288,32 @@
   <p class="subtitle">BackFlashBrothers — Internal Tool</p>
 
   <!-- Summary -->
+  <div class="summary-controls">
+    <div class="toggle-group">
+      <button class="active" onclick="setView('total')">All Time</button>
+      <button onclick="setView('monthly')">Monthly</button>
+    </div>
+    <div class="month-picker" id="month-picker" style="display:none;">
+      <button onclick="shiftMonth(-1)">&larr;</button>
+      <span class="month-label" id="month-label"></span>
+      <button onclick="shiftMonth(1)">&rarr;</button>
+    </div>
+  </div>
   <div class="summary">
     <div class="summary-card">
-      <div class="label">Cameras</div>
+      <div class="label" id="label-count">Cameras</div>
       <div class="value" id="stat-count">0</div>
     </div>
     <div class="summary-card">
-      <div class="label">Total Invested</div>
+      <div class="label" id="label-invested">Total Invested</div>
       <div class="value" id="stat-invested">$0</div>
     </div>
     <div class="summary-card">
-      <div class="label">Total Revenue</div>
+      <div class="label" id="label-revenue">Total Revenue</div>
       <div class="value" id="stat-revenue">$0</div>
     </div>
     <div class="summary-card">
-      <div class="label">Total Profit</div>
+      <div class="label" id="label-profit">Total Profit</div>
       <div class="value" id="stat-profit">$0</div>
     </div>
   </div>
@@ -262,10 +338,11 @@
         <div class="form-group">
           <label for="f-condition">Condition</label>
           <select id="f-condition">
-            <option>Poor</option>
-            <option>Fair</option>
-            <option selected>Good</option>
-            <option>Excellent</option>
+            <option>Non-functional — won't fire or advance</option>
+            <option>Mechanical issues — shutter/advance problems</option>
+            <option selected>Needs service — light seals, cleaning, minor fixes</option>
+            <option>Functional — works but cosmetic wear</option>
+            <option>Fully serviced — tested, ready to sell</option>
           </select>
         </div>
       </div>
@@ -300,9 +377,39 @@
     const STORAGE_KEY = 'bfb_inventory';
     const STATUS_OPTIONS = ['Needs Work', 'In Progress', 'Ready to Sell', 'Sold'];
 
+    let viewMode = 'total'; // 'total' or 'monthly'
+    let viewYear = new Date().getFullYear();
+    let viewMonth = new Date().getMonth(); // 0-indexed
+
     function load() {
       try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }
       catch { return []; }
+    }
+
+    function setView(mode) {
+      viewMode = mode;
+      document.querySelectorAll('.toggle-group button').forEach((btn, i) => {
+        btn.classList.toggle('active', (i === 0 && mode === 'total') || (i === 1 && mode === 'monthly'));
+      });
+      document.getElementById('month-picker').style.display = mode === 'monthly' ? 'inline-flex' : 'none';
+      render();
+    }
+
+    function shiftMonth(delta) {
+      viewMonth += delta;
+      if (viewMonth > 11) { viewMonth = 0; viewYear++; }
+      if (viewMonth < 0) { viewMonth = 11; viewYear--; }
+      render();
+    }
+
+    function monthName(m, y) {
+      return new Date(y, m).toLocaleString('en-US', { month: 'long', year: 'numeric' });
+    }
+
+    function cameraInMonth(cam, year, month) {
+      if (!cam.purchaseDate) return false;
+      const d = new Date(cam.purchaseDate + 'T00:00:00');
+      return d.getFullYear() === year && d.getMonth() === month;
     }
 
     function save(cameras) {
@@ -369,9 +476,12 @@
         tbody.innerHTML = cameras.map(renderRow).join('');
       }
 
-      // Summary
-      let invested = 0, revenue = 0, profit = 0;
-      cameras.forEach(c => {
+      // Summary — filter by view mode
+      const isMonthly = viewMode === 'monthly';
+      const filtered = isMonthly ? cameras.filter(c => cameraInMonth(c, viewYear, viewMonth)) : cameras;
+
+      let invested = 0, revenue = 0, profit = 0, count = filtered.length;
+      filtered.forEach(c => {
         invested += Number(c.purchasePrice) || 0;
         if (c.status === 'Sold') {
           const sp = Number(c.sellPrice) || 0;
@@ -380,13 +490,22 @@
         }
       });
 
-      document.getElementById('stat-count').textContent = cameras.length;
+      const prefix = isMonthly ? 'Monthly' : 'Total';
+      document.getElementById('label-count').textContent = isMonthly ? 'Cameras (Month)' : 'Cameras';
+      document.getElementById('label-invested').textContent = prefix + ' Invested';
+      document.getElementById('label-revenue').textContent = prefix + ' Revenue';
+      document.getElementById('label-profit').textContent = prefix + ' Profit';
+
+      document.getElementById('stat-count').textContent = count;
       document.getElementById('stat-invested').textContent = formatMoney(invested);
       document.getElementById('stat-revenue').textContent = formatMoney(revenue);
 
       const profitEl = document.getElementById('stat-profit');
       profitEl.textContent = formatMoney(profit);
       profitEl.className = 'value ' + (profit >= 0 ? 'positive' : 'negative');
+
+      // Update month label
+      document.getElementById('month-label').textContent = monthName(viewMonth, viewYear);
     }
 
     function updateField(idx, field, value) {
