@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin — BackFlashBrothers</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html">
+        <img src="logo.png" alt="BackFlashBrothers" class="logo">
+      </a>
+      <button class="menu-toggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="shop.html">Shop</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li id="auth-nav-item"><a href="#" id="signin-link">Sign In</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Admin Content Area -->
+  <section class="section">
+    <div class="container">
+      <div id="admin-loading" class="admin-loading">Verifying access...</div>
+      <div id="admin-content" style="display:none;"></div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 BackFlashBrothers &middot; San Antonio, TX</p>
+    </div>
+  </footer>
+
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+  <script src="firebase-config.js"></script>
+  <script src="script.js"></script>
+  <script>
+    const adminLoading = document.getElementById('admin-loading');
+    const adminContent = document.getElementById('admin-content');
+
+    const ORDER_STATUSES = ['received', 'processing', 'shipped', 'delivered'];
+    const INVENTORY_STATUSES = ['Needs Work', 'In Progress', 'Ready to Sell', 'Sold'];
+    const CONDITION_BEFORE = [
+      'Non-functional',
+      'Mechanical issues',
+      'Needs service',
+      'Functional but rough'
+    ];
+    const CONDITION_AFTER = ['', 'Poor', 'Fair', 'Good', 'Excellent', 'Like New'];
+
+    function esc(str) {
+      const d = document.createElement('div');
+      d.textContent = str || '';
+      return d.innerHTML;
+    }
+
+    function formatMoney(val) {
+      const n = parseFloat(val);
+      return isNaN(n) ? '—' : '$' + n.toFixed(2);
+    }
+
+    auth.onAuthStateChanged(async (user) => {
+      if (!user) {
+        window.location.href = 'index.html';
+        return;
+      }
+
+      const admin = await checkAdmin(user.uid);
+      if (!admin) {
+        window.location.href = 'index.html';
+        return;
+      }
+
+      adminLoading.style.display = 'none';
+      adminContent.style.display = '';
+      buildAdminDashboard();
+    });
+
+    async function buildAdminDashboard() {
+      adminContent.innerHTML = `
+        <div class="page-header" style="padding: 0 0 40px 0;">
+          <h1>Admin Dashboard</h1>
+        </div>
+
+        <!-- Summary Stats -->
+        <div class="admin-summary" id="admin-stats"></div>
+
+        <!-- Orders Section -->
+        <div class="admin-section">
+          <h2>Orders</h2>
+          <div style="overflow-x:auto;">
+            <table class="admin-table" id="orders-table">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Customer</th>
+                  <th>Email</th>
+                  <th>Camera</th>
+                  <th>Price</th>
+                  <th>Address</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="orders-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Inventory Section -->
+        <div class="admin-section">
+          <h2>Inventory</h2>
+          <div class="admin-form">
+            <h3>Add Camera</h3>
+            <form id="add-camera-form">
+              <div class="admin-form-grid">
+                <div>
+                  <label>Camera Name</label>
+                  <input type="text" name="name" required placeholder="Nikon FE">
+                </div>
+                <div>
+                  <label>Purchase Price</label>
+                  <input type="number" name="purchasePrice" step="0.01" min="0" required placeholder="25.00">
+                </div>
+                <div>
+                  <label>Purchase Date</label>
+                  <input type="date" name="purchaseDate" required>
+                </div>
+                <div>
+                  <label>Condition (Before)</label>
+                  <select name="conditionBefore">
+                    ${CONDITION_BEFORE.map(c => `<option value="${c}">${c}</option>`).join('')}
+                  </select>
+                </div>
+                <div>
+                  <label>Repair Cost</label>
+                  <input type="number" name="repairCost" step="0.01" min="0" placeholder="0">
+                </div>
+                <div style="display:flex;align-items:end;">
+                  <button type="submit" class="btn btn-primary" style="width:100%;padding:10px 16px;">Add</button>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div style="overflow-x:auto;">
+            <table class="admin-table" id="inventory-table">
+              <thead>
+                <tr>
+                  <th>SKU</th>
+                  <th>Camera</th>
+                  <th>Date</th>
+                  <th>Cost</th>
+                  <th>Repair</th>
+                  <th>Before</th>
+                  <th>After</th>
+                  <th>Status</th>
+                  <th>Sell Price</th>
+                  <th>Profit</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="inventory-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      `;
+
+      // Set default date to today
+      const dateInput = document.querySelector('#add-camera-form input[name="purchaseDate"]');
+      dateInput.value = new Date().toISOString().split('T')[0];
+
+      loadOrders();
+      loadInventory();
+      setupAddCameraForm();
+    }
+
+    // ===== Orders =====
+
+    async function loadOrders() {
+      const tbody = document.getElementById('orders-tbody');
+      tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;color:var(--gray);">Loading...</td></tr>';
+
+      try {
+        const snapshot = await db.collection('orders').orderBy('createdAt', 'desc').get();
+        tbody.innerHTML = '';
+
+        if (snapshot.empty) {
+          tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;color:var(--gray);">No orders yet</td></tr>';
+          return;
+        }
+
+        snapshot.forEach(doc => {
+          const order = doc.data();
+          const date = order.createdAt ? order.createdAt.toDate().toLocaleDateString() : 'Pending';
+          const statusOptions = ORDER_STATUSES.map(s =>
+            `<option value="${s}"${s === (order.status || 'received') ? ' selected' : ''}>${s}</option>`
+          ).join('');
+
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td>${esc(date)}</td>
+            <td>${esc(order.userName)}</td>
+            <td>${esc(order.userEmail)}</td>
+            <td>${esc(order.camera)}</td>
+            <td>${esc(order.price)}</td>
+            <td>${esc(order.shippingAddress)}</td>
+            <td><select class="order-status-select" data-id="${doc.id}">${statusOptions}</select></td>
+          `;
+          tbody.appendChild(tr);
+        });
+
+        // Status change handlers
+        tbody.querySelectorAll('.order-status-select').forEach(select => {
+          select.addEventListener('change', async () => {
+            await db.collection('orders').doc(select.dataset.id).update({ status: select.value });
+          });
+        });
+      } catch (err) {
+        tbody.innerHTML = '<tr><td colspan="7" style="color:var(--amber);">Error loading orders</td></tr>';
+      }
+    }
+
+    // ===== Inventory =====
+
+    function generateSku() {
+      return String(Math.floor(1000 + Math.random() * 9000));
+    }
+
+    async function loadInventory() {
+      const tbody = document.getElementById('inventory-tbody');
+      const stats = document.getElementById('admin-stats');
+      tbody.innerHTML = '<tr><td colspan="11" style="text-align:center;color:var(--gray);">Loading...</td></tr>';
+
+      try {
+        const snapshot = await db.collection('inventory').orderBy('purchaseDate', 'desc').get();
+        tbody.innerHTML = '';
+
+        let totalCameras = 0;
+        let totalInvested = 0;
+        let totalRevenue = 0;
+        let totalProfit = 0;
+
+        if (snapshot.empty) {
+          tbody.innerHTML = '<tr><td colspan="11" style="text-align:center;color:var(--gray);">No cameras in inventory</td></tr>';
+        } else {
+          snapshot.forEach(doc => {
+            const cam = doc.data();
+            totalCameras++;
+            const cost = (parseFloat(cam.purchasePrice) || 0) + (parseFloat(cam.repairCost) || 0);
+            totalInvested += cost;
+            if (cam.status === 'Sold' && cam.sellPrice) {
+              const sell = parseFloat(cam.sellPrice) || 0;
+              totalRevenue += sell;
+              totalProfit += sell - cost;
+            }
+
+            const condAfterOptions = CONDITION_AFTER.map(c =>
+              `<option value="${esc(c)}"${c === (cam.conditionAfter || '') ? ' selected' : ''}>${c || '—'}</option>`
+            ).join('');
+
+            const statusOptions = INVENTORY_STATUSES.map(s =>
+              `<option value="${esc(s)}"${s === cam.status ? ' selected' : ''}>${s}</option>`
+            ).join('');
+
+            const profit = cam.status === 'Sold' && cam.sellPrice
+              ? (parseFloat(cam.sellPrice) || 0) - cost
+              : null;
+
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+              <td style="font-family:'Space Mono',monospace;font-size:0.75rem;color:var(--gray)">${esc(cam.sku)}</td>
+              <td>${esc(cam.name)}</td>
+              <td>${esc(cam.purchaseDate)}</td>
+              <td>${formatMoney(cam.purchasePrice)}</td>
+              <td><input type="number" min="0" step="0.01" value="${cam.repairCost || ''}" placeholder="0" style="width:80px;padding:4px 8px;border:2px solid var(--light-gray);border-radius:2px;font-size:0.8rem;" data-id="${doc.id}" data-field="repairCost"></td>
+              <td style="font-size:0.8rem;">${esc(cam.conditionBefore)}</td>
+              <td><select data-id="${doc.id}" data-field="conditionAfter" style="font-size:0.8rem;padding:4px;">${condAfterOptions}</select></td>
+              <td><select data-id="${doc.id}" data-field="status" style="font-size:0.8rem;padding:4px;">${statusOptions}</select></td>
+              <td><input type="number" min="0" step="0.01" value="${cam.sellPrice || ''}" placeholder="0" style="width:80px;padding:4px 8px;border:2px solid var(--light-gray);border-radius:2px;font-size:0.8rem;" data-id="${doc.id}" data-field="sellPrice"></td>
+              <td style="font-family:'Space Mono',monospace;font-size:0.8rem;color:${profit !== null ? (profit >= 0 ? 'var(--olive)' : 'var(--amber)') : 'var(--gray)'}">${profit !== null ? formatMoney(profit) : '—'}</td>
+              <td><button class="delete-btn" data-id="${doc.id}" title="Delete">&times;</button></td>
+            `;
+            tbody.appendChild(tr);
+          });
+        }
+
+        // Stats
+        stats.innerHTML = `
+          <div class="admin-stat">
+            <div class="stat-value">${totalCameras}</div>
+            <div class="stat-label">Cameras</div>
+          </div>
+          <div class="admin-stat">
+            <div class="stat-value">${formatMoney(totalInvested)}</div>
+            <div class="stat-label">Invested</div>
+          </div>
+          <div class="admin-stat">
+            <div class="stat-value">${formatMoney(totalRevenue)}</div>
+            <div class="stat-label">Revenue</div>
+          </div>
+          <div class="admin-stat">
+            <div class="stat-value" style="color:${totalProfit >= 0 ? 'var(--olive)' : 'var(--amber)'}">${formatMoney(totalProfit)}</div>
+            <div class="stat-label">Profit</div>
+          </div>
+        `;
+
+        // Inline edit handlers
+        tbody.querySelectorAll('input[data-field], select[data-field]').forEach(el => {
+          el.addEventListener('change', async () => {
+            const val = el.tagName === 'INPUT' && el.type === 'number'
+              ? (el.value ? parseFloat(el.value) : '')
+              : el.value;
+            await db.collection('inventory').doc(el.dataset.id).update({ [el.dataset.field]: val });
+            loadInventory(); // Refresh to recalculate profits/stats
+          });
+        });
+
+        // Delete handlers
+        tbody.querySelectorAll('.delete-btn').forEach(btn => {
+          btn.addEventListener('click', async () => {
+            if (confirm('Delete this camera from inventory?')) {
+              await db.collection('inventory').doc(btn.dataset.id).delete();
+              loadInventory();
+            }
+          });
+        });
+
+      } catch (err) {
+        tbody.innerHTML = '<tr><td colspan="11" style="color:var(--amber);">Error loading inventory</td></tr>';
+      }
+    }
+
+    function setupAddCameraForm() {
+      const form = document.getElementById('add-camera-form');
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const btn = form.querySelector('button[type="submit"]');
+        btn.disabled = true;
+        btn.textContent = 'Adding...';
+
+        const camera = {
+          sku: generateSku(),
+          name: form.elements['name'].value.trim(),
+          purchasePrice: parseFloat(form.elements['purchasePrice'].value) || 0,
+          purchaseDate: form.elements['purchaseDate'].value,
+          conditionBefore: form.elements['conditionBefore'].value,
+          repairCost: parseFloat(form.elements['repairCost'].value) || 0,
+          conditionAfter: '',
+          status: 'Needs Work',
+          sellPrice: '',
+          createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        };
+
+        try {
+          await db.collection('inventory').add(camera);
+          form.reset();
+          form.elements['purchaseDate'].value = new Date().toISOString().split('T')[0];
+          loadInventory();
+        } catch (err) {
+          alert('Error adding camera. Please try again.');
+        } finally {
+          btn.disabled = false;
+          btn.textContent = 'Add';
+        }
+      });
+    }
+  </script>
+</body>
+</html>

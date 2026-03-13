@@ -7,7 +7,7 @@
   <meta name="description" content="Vintage film cameras tested, repaired, and ready to shoot. Nikon FE, FM, F2 and more from San Antonio, TX.">
   <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="home">
 
   <!-- Nav -->
   <nav>
@@ -23,6 +23,7 @@
         <li><a href="shop.html">Shop</a></li>
         <li><a href="about.html">About</a></li>
         <li><a href="contact.html">Contact</a></li>
+        <li id="auth-nav-item"><a href="#" id="signin-link">Sign In</a></li>
       </ul>
     </div>
   </nav>
@@ -54,7 +55,7 @@
             <div class="card-condition">Excellent Condition</div>
             <div class="card-footer">
               <span class="card-price">$120</span>
-              <a href="contact.html" class="btn btn-primary">Contact to Buy</a>
+              <a href="shop.html" class="btn btn-primary">Buy</a>
             </div>
           </div>
         </div>
@@ -66,7 +67,7 @@
             <div class="card-condition">Good Condition</div>
             <div class="card-footer">
               <span class="card-price">$95</span>
-              <a href="contact.html" class="btn btn-primary">Contact to Buy</a>
+              <a href="shop.html" class="btn btn-primary">Buy</a>
             </div>
           </div>
         </div>
@@ -78,7 +79,7 @@
             <div class="card-condition">Excellent Condition</div>
             <div class="card-footer">
               <span class="card-price">$175</span>
-              <a href="contact.html" class="btn btn-primary">Contact to Buy</a>
+              <a href="shop.html" class="btn btn-primary">Buy</a>
             </div>
           </div>
         </div>
@@ -130,6 +131,10 @@
     </div>
   </footer>
 
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+  <script src="firebase-config.js"></script>
   <script src="script.js"></script>
 </body>
 </html>

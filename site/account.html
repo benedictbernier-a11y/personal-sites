@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Orders — BackFlashBrothers</title>
+  <meta name="description" content="Track your camera orders from BackFlashBrothers.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html">
+        <img src="logo.png" alt="BackFlashBrothers" class="logo">
+      </a>
+      <button class="menu-toggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="shop.html">Shop</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li id="auth-nav-item"><a href="#" id="signin-link">Sign In</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <section class="page-header">
+    <div class="container">
+      <h1>My Orders</h1>
+      <p>Track the status of your camera purchases</p>
+    </div>
+  </section>
+
+  <!-- Orders Content -->
+  <section class="section">
+    <div class="container">
+      <div id="account-loading" class="admin-loading">Loading your orders...</div>
+      <div id="account-signin" class="prompt-signin" style="display:none;">
+        <h2>Sign in to view your orders</h2>
+        <p>Create an account or sign in to track your camera purchases.</p>
+        <button class="btn btn-primary" id="account-signin-btn">Sign In</button>
+      </div>
+      <div id="account-orders" style="display:none;">
+        <div id="orders-list" class="orders-list"></div>
+        <div id="no-orders" class="prompt-signin" style="display:none;">
+          <h2>No orders yet</h2>
+          <p>When you purchase a camera, your orders will show up here.</p>
+          <a href="shop.html" class="btn btn-primary">Browse Cameras</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 BackFlashBrothers &middot; San Antonio, TX</p>
+    </div>
+  </footer>
+
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+  <script src="firebase-config.js"></script>
+  <script src="script.js"></script>
+  <script>
+    const accountLoading = document.getElementById('account-loading');
+    const accountSignin = document.getElementById('account-signin');
+    const accountOrders = document.getElementById('account-orders');
+    const ordersList = document.getElementById('orders-list');
+    const noOrders = document.getElementById('no-orders');
+
+    document.getElementById('account-signin-btn').addEventListener('click', () => {
+      openAuthModal();
+    });
+
+    auth.onAuthStateChanged(async (user) => {
+      accountLoading.style.display = 'none';
+
+      if (!user) {
+        accountSignin.style.display = '';
+        accountOrders.style.display = 'none';
+        return;
+      }
+
+      accountSignin.style.display = 'none';
+      accountOrders.style.display = '';
+      ordersList.innerHTML = '';
+
+      try {
+        const snapshot = await db.collection('orders')
+          .where('userId', '==', user.uid)
+          .orderBy('createdAt', 'desc')
+          .get();
+
+        if (snapshot.empty) {
+          noOrders.style.display = '';
+          return;
+        }
+
+        noOrders.style.display = 'none';
+
+        snapshot.forEach(doc => {
+          const order = doc.data();
+          const date = order.createdAt ? order.createdAt.toDate().toLocaleDateString() : 'Pending';
+          const statusClass = 'badge-' + (order.status || 'received');
+
+          const card = document.createElement('div');
+          card.className = 'order-card';
+          card.innerHTML = `
+            <div>
+              <div class="order-camera">${order.camera}</div>
+              <div class="order-date">Ordered: ${date}</div>
+            </div>
+            <div class="order-price">${order.price}</div>
+            <span class="order-status ${statusClass}">${order.status || 'received'}</span>
+          `;
+          ordersList.appendChild(card);
+        });
+      } catch (err) {
+        ordersList.innerHTML = '<p style="color: var(--gray);">Unable to load orders. Please try again later.</p>';
+      }
+    });
+  </script>
+</body>
+</html>
