@@ -2,6 +2,16 @@
 
 Film camera repair and resale business. We buy broken vintage film cameras (primarily Nikon FE, FM, F2), repair them, and sell them on our website and eBay.
 
+## Key Facts
+
+- We're Benedict (17) and Laurence (15) in San Antonio, TX
+- Benedict handles: camera repair, photography, creative/brand work
+- Laurence handles: financial tracking, pricing, inventory systems
+- Our target customer is film photography enthusiasts, 18-35
+- We're starting with Nikon bodies (FE, FM, F2) Benedict already knows how to repair
+- We sell through our own website primarily
+- Startup budget: $200 from Dad, split 50/50 after that
+
 ## Business
 
 - **Founders:** Benedict (repairs, sourcing, photography) and Laurence (pricing, inventory, sales platforms)
