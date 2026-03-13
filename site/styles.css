@@ -5,12 +5,12 @@
 
 :root {
   --black: #1A1A1A;
-  --amber: #D4883A;
-  --sienna: #A0522D;
-  --cream: #F5F0E8;
+  --amber: #FDB515;
+  --sienna: #E5A00D;
+  --cream: #F5F3ED;
   --white: #FFFFFF;
   --gray: #6B6B6B;
-  --light-gray: #E8E3DB;
+  --light-gray: #E6E5E0;
 }
 
 * {
@@ -76,8 +76,9 @@ nav {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: var(--black);
+  background: var(--cream);
   padding: 0 24px;
+  border-bottom: 1px solid var(--light-gray);
 }
 
 nav .nav-inner {
@@ -106,7 +107,7 @@ nav .nav-links a {
   font-size: 0.95rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: var(--cream);
+  color: var(--black);
   transition: color 0.2s;
 }
 
@@ -127,7 +128,7 @@ nav .nav-links a.active {
   display: block;
   width: 24px;
   height: 2px;
-  background: var(--cream);
+  background: var(--black);
   margin: 6px 0;
   transition: 0.3s;
 }
@@ -135,16 +136,33 @@ nav .nav-links a.active {
 /* ===== Hero ===== */
 
 .hero {
-  background: var(--black);
+  background-color: var(--cream);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
   color: var(--cream);
-  padding: 100px 24px;
+  padding: 120px 24px;
   text-align: center;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(26, 26, 26, 0.55);
+  z-index: 1;
+}
+
+.hero .container {
+  position: relative;
+  z-index: 2;
 }
 
 .hero h1 {
   font-size: clamp(2.5rem, 6vw, 4.5rem);
   margin-bottom: 16px;
-  color: var(--cream);
+  color: var(--amber);
 }
 
 .hero h1 span {
@@ -188,7 +206,7 @@ nav .nav-links a.active {
 
 .btn-outline {
   background: transparent;
-  color: var(--cream);
+  color: var(--black);
   border: 2px solid var(--amber);
 }
 
@@ -311,8 +329,8 @@ nav .nav-links a.active {
 /* ===== Shop Page ===== */
 
 .page-header {
-  background: var(--black);
-  color: var(--cream);
+  background: var(--cream);
+  color: var(--black);
   padding: 60px 24px;
   text-align: center;
 }
@@ -322,7 +340,7 @@ nav .nav-links a.active {
 }
 
 .page-header p {
-  color: var(--light-gray);
+  color: var(--gray);
   margin-top: 8px;
   font-size: 1.05rem;
 }
@@ -513,10 +531,11 @@ nav .nav-links a.active {
 /* ===== Footer ===== */
 
 footer {
-  background: var(--black);
-  color: var(--cream);
+  background: var(--cream);
+  color: var(--black);
   padding: 40px 24px;
   text-align: center;
+  border-top: 1px solid var(--light-gray);
 }
 
 footer p {
@@ -542,11 +561,11 @@ footer a {
     top: 64px;
     left: 0;
     right: 0;
-    background: var(--black);
+    background: var(--cream);
     flex-direction: column;
     padding: 24px;
     gap: 20px;
-    border-top: 1px solid #333;
+    border-top: 1px solid var(--light-gray);
   }
 
   nav .nav-links.open {
@@ -556,6 +575,7 @@ footer a {
   .hero {
     padding: 64px 24px;
   }
+
 
   .about-content {
     grid-template-columns: 1fr;

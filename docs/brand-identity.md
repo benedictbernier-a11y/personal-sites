@@ -5,11 +5,12 @@
 | Role | Color | Hex |
 |------|-------|-----|
 | Primary | Darkroom Black | `#1A1A1A` |
-| Secondary | Warm Amber | `#D4883A` |
-| Accent | Burnt Sienna | `#A0522D` |
-| Neutral | Cream | `#F5F0E8` |
+| Accent | Kodak Yellow | `#FDB515` |
+| Accent Hover | Deep Gold | `#E5A00D` |
+| Neutral | Cream | `#F5F3ED` |
+| Light Gray | Warm Gray | `#E6E5E0` |
 
-Warm, analog, cohesive — tungsten light, leather straps, wooden workbenches.
+Inspired by Kodak film stock — bold yellow against warm neutrals. Analog, confident, and instantly recognizable.
 
 ## Typography
 
