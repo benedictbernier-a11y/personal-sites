@@ -375,6 +375,7 @@
     <table>
       <thead>
         <tr>
+          <th>SKU</th>
           <th>Camera</th>
           <th>Date</th>
           <th>Cost</th>
@@ -388,7 +389,7 @@
         </tr>
       </thead>
       <tbody id="inventory-body">
-        <tr><td colspan="10" class="empty-state">No cameras yet. Add one above.</td></tr>
+        <tr><td colspan="11" class="empty-state">No cameras yet. Add one above.</td></tr>
       </tbody>
     </table>
   </div>
@@ -396,6 +397,10 @@
   <script>
     const STORAGE_KEY = 'bfb_inventory';
     const STATUS_OPTIONS = ['Needs Work', 'In Progress', 'Ready to Sell', 'Sold'];
+
+    function generateSku() {
+      return String(Math.floor(1000 + Math.random() * 9000));
+    }
     const CONDITION_AFTER_OPTIONS = [
       '',
       'Poor',
@@ -410,8 +415,14 @@
     let viewMonth = new Date().getMonth(); // 0-indexed
 
     function load() {
-      try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }
-      catch { return []; }
+      let cameras;
+      try { cameras = JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }
+      catch { cameras = []; }
+      // Backfill SKU for existing cameras
+      let changed = false;
+      cameras.forEach(c => { if (!c.sku) { c.sku = generateSku(); changed = true; } });
+      if (changed) save(cameras);
+      return cameras;
     }
 
     function setView(mode) {
@@ -493,6 +504,7 @@
       const beforeFull = cam.conditionBefore || cam.condition || '';
 
       return `<tr>
+        <td style="font-family:monospace;font-size:0.75rem;color:#6e6e73">${esc(cam.sku || '—')}</td>
         <td class="cam-name">${esc(cam.name)}</td>
         <td>${formatShortDate(cam.purchaseDate)}</td>
         <td>${formatMoney(cam.purchasePrice)}</td>
@@ -517,7 +529,7 @@
       const tbody = document.getElementById('inventory-body');
 
       if (cameras.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="10" class="empty-state">No cameras yet. Add one above.</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="11" class="empty-state">No cameras yet. Add one above.</td></tr>';
       } else {
         const isMonthlyView = viewMode === 'monthly';
         const visible = isMonthlyView ? cameras.filter(c => cameraInMonth(c, viewYear, viewMonth)) : cameras;
@@ -526,7 +538,7 @@
           return renderRow(cam, origIdx);
         }).join('');
         if (visible.length === 0) {
-          tbody.innerHTML = '<tr><td colspan="10" class="empty-state">No cameras this month.</td></tr>';
+          tbody.innerHTML = '<tr><td colspan="11" class="empty-state">No cameras this month.</td></tr>';
         }
       }
 
@@ -584,6 +596,7 @@
       e.preventDefault();
       const cameras = load();
       cameras.push({
+        sku: generateSku(),
         name: document.getElementById('f-name').value.trim(),
         purchasePrice: document.getElementById('f-purchase-price').value,
         purchaseDate: document.getElementById('f-purchase-date').value,
