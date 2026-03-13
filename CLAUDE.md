@@ -1,6 +1,6 @@
-# ReAdvance
+# BackFlashBrothers
 
-Film camera repair and resale business. We buy broken vintage film cameras (primarily Nikon FE, FM, F2), repair them, and sell them on our website and eBay.
+Film camera repair and resale business. We buy broken vintage film cameras (primarily Nikon FE, FM, F2), repair them, and sell them on our website.
 
 ## Key Facts
 
@@ -22,17 +22,15 @@ Film camera repair and resale business. We buy broken vintage film cameras (prim
 
 ## Repo Structure
 
-- `docs/` — Business plan and financial model
-- `research/` — Market research and sourcing info
+- `docs/` — Business plan, financial model, brand identity
 - `site/` — Website files (to be built)
-- `tools/` — Internal tools (inventory tracker, profit calculator, etc.)
-- `benedict/` — Benedict's personal site
-- `laurence/` — Laurence's personal site
+- `tools/` — Internal tools (inventory tracker, profit calculator)
 
 ## Key Documents
 
 - `docs/business-plan.md` — One-page business plan with roles, pricing, and sales strategy
 - `docs/financial-model.md` — Cost breakdowns, revenue projections, and break-even analysis
+- `docs/brand-identity.md` — Brand voice, visual identity, and messaging guidelines
 - `decision.md` — Why we chose this business
 - `business-ideas.md` — Original brainstorm of all business ideas considered
 
