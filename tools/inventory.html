@@ -13,7 +13,7 @@
       color: #1d1d1f;
       line-height: 1.5;
       padding: 2rem;
-      max-width: 1200px;
+      max-width: 960px;
       margin: 0 auto;
     }
 
@@ -195,31 +195,33 @@
 
     .btn-danger {
       background: none;
+      border: none;
       color: #d43b3b;
-      padding: 0.35rem 0.5rem;
-      font-size: 0.8rem;
+      cursor: pointer;
+      font-size: 1rem;
+      padding: 0;
+      line-height: 1;
     }
 
-    .btn-danger:hover { background: #fef2f2; }
+    .btn-danger:hover { opacity: 0.7; }
 
-    /* Table */
-    .table-wrapper {
+    /* Inventory table */
+    .table-wrap {
       background: #fff;
       border-radius: 10px;
       box-shadow: 0 1px 3px rgba(0,0,0,0.06);
-      overflow-x: auto;
     }
 
     table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 0.875rem;
+      font-size: 0.8rem;
     }
 
     thead th {
       text-align: left;
-      padding: 0.75rem 1rem;
-      font-size: 0.75rem;
+      padding: 0.6rem 0.5rem;
+      font-size: 0.65rem;
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.04em;
@@ -229,9 +231,10 @@
     }
 
     tbody td {
-      padding: 0.65rem 1rem;
+      padding: 0.5rem;
       border-bottom: 1px solid #f0f0f5;
       vertical-align: middle;
+      white-space: nowrap;
     }
 
     tbody tr:last-child td { border-bottom: none; }
@@ -243,12 +246,41 @@
       color: #6e6e73;
     }
 
-    /* Inline edit inputs */
-    td select, td input {
-      padding: 0.3rem 0.5rem;
+    .cam-name { font-weight: 600; }
+
+    .before-cond {
+      color: #6e6e73;
+      font-size: 0.75rem;
+      cursor: help;
+      position: relative;
+    }
+
+    .before-cond .tip {
+      display: none;
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #1d1d1f;
+      color: #fff;
+      font-size: 0.72rem;
+      padding: 0.35rem 0.6rem;
+      border-radius: 4px;
+      white-space: nowrap;
+      pointer-events: none;
+      margin-bottom: 4px;
+      z-index: 10;
+    }
+
+    .before-cond:hover .tip {
+      display: block;
+    }
+
+    td select, td input[type="number"] {
+      padding: 0.2rem 0.35rem;
       border: 1px solid #d2d2d7;
       border-radius: 4px;
-      font-size: 0.825rem;
+      font-size: 0.78rem;
       font-family: inherit;
       background: #fafafa;
     }
@@ -258,22 +290,11 @@
       border-color: #0071e3;
     }
 
-    td input[type="number"] { width: 90px; }
+    td input[type="number"] { width: 70px; }
 
-    /* Status badges */
-    .status-badge {
-      display: inline-block;
-      padding: 0.15rem 0.6rem;
-      border-radius: 999px;
-      font-size: 0.75rem;
-      font-weight: 500;
-      white-space: nowrap;
-    }
-
-    .status-needs-work { background: #fef3cd; color: #856404; }
-    .status-in-progress { background: #cfe2ff; color: #084298; }
-    .status-ready-to-sell { background: #d1e7dd; color: #0f5132; }
-    .status-sold { background: #e8e8ed; color: #3a3a3c; }
+    .profit { font-weight: 600; color: #2d8a4e; }
+    .profit.negative { color: #d43b3b; }
+    .profit.none { color: #6e6e73; font-weight: 400; }
 
     /* Responsive tweaks */
     @media (max-width: 640px) {
@@ -336,13 +357,12 @@
           <input type="date" id="f-purchase-date" required>
         </div>
         <div class="form-group">
-          <label for="f-condition">Condition</label>
+          <label for="f-condition">Condition (Before)</label>
           <select id="f-condition">
             <option>Non-functional — won't fire or advance</option>
-            <option>Mechanical issues — shutter/advance problems</option>
+            <option>Mechanical issues — shutter, advance, or meter problems</option>
             <option selected>Needs service — light seals, cleaning, minor fixes</option>
-            <option>Functional — works but cosmetic wear</option>
-            <option>Fully serviced — tested, ready to sell</option>
+            <option>Functional but rough — works with cosmetic wear or quirks</option>
           </select>
         </div>
       </div>
@@ -350,25 +370,25 @@
     </form>
   </div>
 
-  <!-- Inventory Table -->
-  <div class="table-wrapper">
+  <!-- Inventory -->
+  <div class="table-wrap">
     <table>
       <thead>
         <tr>
           <th>Camera</th>
-          <th>Purchased</th>
+          <th>Date</th>
           <th>Cost</th>
-          <th>Condition</th>
+          <th>Repair</th>
+          <th>Before</th>
+          <th>After</th>
           <th>Status</th>
-          <th>Sell Price</th>
+          <th>Sell</th>
           <th>Profit</th>
           <th></th>
         </tr>
       </thead>
       <tbody id="inventory-body">
-        <tr class="empty-state" id="empty-row">
-          <td colspan="8">No cameras yet. Add one above.</td>
-        </tr>
+        <tr><td colspan="10" class="empty-state">No cameras yet. Add one above.</td></tr>
       </tbody>
     </table>
   </div>
@@ -376,6 +396,14 @@
   <script>
     const STORAGE_KEY = 'bfb_inventory';
     const STATUS_OPTIONS = ['Needs Work', 'In Progress', 'Ready to Sell', 'Sold'];
+    const CONDITION_AFTER_OPTIONS = [
+      '',
+      'Poor',
+      'Fair',
+      'Good',
+      'Excellent',
+      'Like New',
+    ];
 
     let viewMode = 'total'; // 'total' or 'monthly'
     let viewYear = new Date().getFullYear();
@@ -431,31 +459,50 @@
       return `${m}/${d}/${y}`;
     }
 
+    const BEFORE_ABBREV = {
+      "Non-functional — won't fire or advance": 'Non-func',
+      "Mechanical issues — shutter, advance, or meter problems": 'Mech iss',
+      "Needs service — light seals, cleaning, minor fixes": 'Needs svc',
+      "Functional but rough — works with cosmetic wear or quirks": 'Func/rough',
+    };
+
+    function abbrevBefore(full) {
+      return BEFORE_ABBREV[full] || full || '—';
+    }
+
+    function formatShortDate(iso) {
+      if (!iso) return '';
+      const [y, m, d] = iso.split('-');
+      return `${m}/${d}`;
+    }
+
     function renderRow(cam, idx) {
-      const profit = cam.status === 'Sold' ? (Number(cam.sellPrice) || 0) - (Number(cam.purchasePrice) || 0) : null;
+      const totalCost = (Number(cam.purchasePrice) || 0) + (Number(cam.repairCost) || 0);
+      const profit = cam.status === 'Sold' ? (Number(cam.sellPrice) || 0) - totalCost : null;
+      const profitClass = profit !== null ? (profit >= 0 ? '' : 'negative') : 'none';
+      const profitText = profit !== null ? formatMoney(profit) : '—';
 
       const statusOptions = STATUS_OPTIONS.map(s =>
         `<option${s === cam.status ? ' selected' : ''}>${s}</option>`
       ).join('');
 
-      return `<tr data-idx="${idx}">
-        <td><strong>${esc(cam.name)}</strong></td>
-        <td>${formatDate(cam.purchaseDate)}</td>
+      const conditionOptions = CONDITION_AFTER_OPTIONS.map(c =>
+        `<option value="${esc(c)}"${c === (cam.conditionAfter || '') ? ' selected' : ''}>${c || '—'}</option>`
+      ).join('');
+
+      const beforeFull = cam.conditionBefore || cam.condition || '';
+
+      return `<tr>
+        <td class="cam-name">${esc(cam.name)}</td>
+        <td>${formatShortDate(cam.purchaseDate)}</td>
         <td>${formatMoney(cam.purchasePrice)}</td>
-        <td>${esc(cam.condition)}</td>
-        <td>
-          <select onchange="updateField(${idx},'status',this.value)">
-            ${statusOptions}
-          </select>
-        </td>
-        <td>
-          <input type="number" min="0" step="0.01"
-            value="${cam.sellPrice || ''}"
-            placeholder="—"
-            onchange="updateField(${idx},'sellPrice',this.value)">
-        </td>
-        <td>${profit !== null ? formatMoney(profit) : '—'}</td>
-        <td><button class="btn btn-danger" onclick="deleteCam(${idx})">Delete</button></td>
+        <td><input type="number" min="0" step="0.01" value="${cam.repairCost || ''}" placeholder="0" onchange="updateField(${idx},'repairCost',this.value)"></td>
+        <td><span class="before-cond">${esc(abbrevBefore(beforeFull))}<span class="tip">${esc(beforeFull)}</span></span></td>
+        <td><select onchange="updateField(${idx},'conditionAfter',this.value)">${conditionOptions}</select></td>
+        <td><select onchange="updateField(${idx},'status',this.value)">${statusOptions}</select></td>
+        <td><input type="number" min="0" step="0.01" value="${cam.sellPrice || ''}" placeholder="—" onchange="updateField(${idx},'sellPrice',this.value)"></td>
+        <td class="profit ${profitClass}">${profitText}</td>
+        <td><button class="btn-danger" onclick="deleteCam(${idx})">&times;</button></td>
       </tr>`;
     }
 
@@ -468,12 +515,19 @@
     function render() {
       const cameras = load();
       const tbody = document.getElementById('inventory-body');
-      const empty = document.getElementById('empty-row');
 
       if (cameras.length === 0) {
-        tbody.innerHTML = '<tr class="empty-state" id="empty-row"><td colspan="8">No cameras yet. Add one above.</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="10" class="empty-state">No cameras yet. Add one above.</td></tr>';
       } else {
-        tbody.innerHTML = cameras.map(renderRow).join('');
+        const isMonthlyView = viewMode === 'monthly';
+        const visible = isMonthlyView ? cameras.filter(c => cameraInMonth(c, viewYear, viewMonth)) : cameras;
+        tbody.innerHTML = visible.map((cam) => {
+          const origIdx = cameras.indexOf(cam);
+          return renderRow(cam, origIdx);
+        }).join('');
+        if (visible.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="10" class="empty-state">No cameras this month.</td></tr>';
+        }
       }
 
       // Summary — filter by view mode
@@ -482,11 +536,12 @@
 
       let invested = 0, revenue = 0, profit = 0, count = filtered.length;
       filtered.forEach(c => {
-        invested += Number(c.purchasePrice) || 0;
+        const cost = (Number(c.purchasePrice) || 0) + (Number(c.repairCost) || 0);
+        invested += cost;
         if (c.status === 'Sold') {
           const sp = Number(c.sellPrice) || 0;
           revenue += sp;
-          profit += sp - (Number(c.purchasePrice) || 0);
+          profit += sp - cost;
         }
       });
 
@@ -532,8 +587,10 @@
         name: document.getElementById('f-name').value.trim(),
         purchasePrice: document.getElementById('f-purchase-price').value,
         purchaseDate: document.getElementById('f-purchase-date').value,
-        condition: document.getElementById('f-condition').value,
+        conditionBefore: document.getElementById('f-condition').value,
         status: 'Needs Work',
+        repairCost: '',
+        conditionAfter: '',
         sellPrice: '',
       });
       save(cameras);
