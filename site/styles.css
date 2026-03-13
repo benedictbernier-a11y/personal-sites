@@ -1,0 +1,546 @@
+/* ===== BackFlashBrothers — Global Styles ===== */
+
+/* Fonts: Barlow Condensed (headlines), Inter (body), Space Mono (accent) */
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;700&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap');
+
+:root {
+  --black: #1A1A1A;
+  --amber: #D4883A;
+  --sienna: #A0522D;
+  --cream: #F5F0E8;
+  --white: #FFFFFF;
+  --gray: #6B6B6B;
+  --light-gray: #E8E3DB;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--cream);
+  color: var(--black);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  line-height: 1.1;
+}
+
+.mono {
+  font-family: 'Space Mono', monospace;
+}
+
+a {
+  color: var(--amber);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+a:hover {
+  color: var(--sienna);
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* ===== Layout ===== */
+
+.container {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.section {
+  padding: 80px 0;
+}
+
+/* ===== Navigation ===== */
+
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--black);
+  padding: 0 24px;
+}
+
+nav .nav-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+}
+
+nav .logo {
+  height: 44px;
+  width: 44px;
+}
+
+nav .nav-links {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+}
+
+nav .nav-links a {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 500;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--cream);
+  transition: color 0.2s;
+}
+
+nav .nav-links a:hover,
+nav .nav-links a.active {
+  color: var(--amber);
+}
+
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.menu-toggle span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--cream);
+  margin: 6px 0;
+  transition: 0.3s;
+}
+
+/* ===== Hero ===== */
+
+.hero {
+  background: var(--black);
+  color: var(--cream);
+  padding: 100px 24px;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  margin-bottom: 16px;
+  color: var(--cream);
+}
+
+.hero h1 span {
+  color: var(--amber);
+}
+
+.hero p {
+  font-size: 1.15rem;
+  max-width: 560px;
+  margin: 0 auto 32px;
+  color: var(--light-gray);
+  line-height: 1.7;
+}
+
+.btn {
+  display: inline-block;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 14px 32px;
+  border: none;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: background 0.2s, transform 0.15s;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn-primary {
+  background: var(--amber);
+  color: var(--black);
+}
+
+.btn-primary:hover {
+  background: var(--sienna);
+  color: var(--white);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--cream);
+  border: 2px solid var(--amber);
+}
+
+.btn-outline:hover {
+  background: var(--amber);
+  color: var(--black);
+}
+
+/* ===== Featured Cameras ===== */
+
+.section-header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.section-header h2 {
+  font-size: 2.2rem;
+  margin-bottom: 8px;
+}
+
+.section-header p {
+  color: var(--gray);
+  font-size: 1rem;
+}
+
+.camera-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.camera-card {
+  background: var(--white);
+  border-radius: 4px;
+  overflow: hidden;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.camera-card:hover {
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  transform: translateY(-2px);
+}
+
+.camera-card .card-img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  background: var(--light-gray);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gray);
+  font-family: 'Space Mono', monospace;
+  font-size: 0.85rem;
+}
+
+.camera-card .card-body {
+  padding: 20px;
+}
+
+.camera-card .card-model {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.camera-card .card-condition {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--amber);
+  margin: 6px 0 12px;
+}
+
+.camera-card .card-price {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--black);
+}
+
+.camera-card .card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 16px;
+}
+
+/* ===== Why Buy From Us ===== */
+
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 32px;
+}
+
+.why-item {
+  text-align: center;
+  padding: 24px;
+}
+
+.why-item .icon {
+  font-size: 2rem;
+  margin-bottom: 16px;
+  display: block;
+}
+
+.why-item h3 {
+  font-size: 1.2rem;
+  margin-bottom: 8px;
+}
+
+.why-item p {
+  color: var(--gray);
+  font-size: 0.95rem;
+}
+
+/* ===== Shop Page ===== */
+
+.page-header {
+  background: var(--black);
+  color: var(--cream);
+  padding: 60px 24px;
+  text-align: center;
+}
+
+.page-header h1 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+}
+
+.page-header p {
+  color: var(--light-gray);
+  margin-top: 8px;
+  font-size: 1.05rem;
+}
+
+.shop-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.badge {
+  display: inline-block;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 4px 10px;
+  border-radius: 2px;
+}
+
+.badge-sold {
+  background: var(--black);
+  color: var(--cream);
+}
+
+.badge-available {
+  background: var(--amber);
+  color: var(--black);
+}
+
+/* ===== About Page ===== */
+
+.about-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+
+.about-content .about-photo {
+  aspect-ratio: 3/4;
+  background: var(--light-gray);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gray);
+  font-family: 'Space Mono', monospace;
+  font-size: 0.85rem;
+}
+
+.about-text h2 {
+  font-size: 2rem;
+  margin-bottom: 16px;
+}
+
+.about-text p {
+  margin-bottom: 16px;
+  color: var(--gray);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.process-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 32px;
+  margin-top: 48px;
+}
+
+.step {
+  text-align: center;
+  padding: 24px;
+}
+
+.step .step-num {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--amber);
+  line-height: 1;
+  margin-bottom: 12px;
+}
+
+.step h3 {
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+}
+
+.step p {
+  color: var(--gray);
+  font-size: 0.9rem;
+}
+
+/* ===== Contact Page ===== */
+
+.contact-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+}
+
+.contact-form label {
+  display: block;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 0.85rem;
+  margin-bottom: 6px;
+  color: var(--black);
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid var(--light-gray);
+  background: var(--white);
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  color: var(--black);
+  margin-bottom: 20px;
+  transition: border-color 0.2s;
+  border-radius: 2px;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: none;
+  border-color: var(--amber);
+}
+
+.contact-form textarea {
+  min-height: 160px;
+  resize: vertical;
+}
+
+.contact-info h3 {
+  font-size: 1.3rem;
+  margin-bottom: 16px;
+}
+
+.contact-info p {
+  color: var(--gray);
+  margin-bottom: 24px;
+  line-height: 1.7;
+}
+
+.contact-detail {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  font-size: 1rem;
+}
+
+.contact-detail .label {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--gray);
+  min-width: 80px;
+}
+
+/* ===== Footer ===== */
+
+footer {
+  background: var(--black);
+  color: var(--cream);
+  padding: 40px 24px;
+  text-align: center;
+}
+
+footer p {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.8rem;
+  color: var(--gray);
+}
+
+footer a {
+  color: var(--amber);
+}
+
+/* ===== Responsive ===== */
+
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+  }
+
+  nav .nav-links {
+    display: none;
+    position: absolute;
+    top: 64px;
+    left: 0;
+    right: 0;
+    background: var(--black);
+    flex-direction: column;
+    padding: 24px;
+    gap: 20px;
+    border-top: 1px solid #333;
+  }
+
+  nav .nav-links.open {
+    display: flex;
+  }
+
+  .hero {
+    padding: 64px 24px;
+  }
+
+  .about-content {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-layout {
+    grid-template-columns: 1fr;
+  }
+}

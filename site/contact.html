@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — BackFlashBrothers</title>
+  <meta name="description" content="Get in touch about a camera, ask a question, or just say hey.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html">
+        <img src="logo.svg" alt="BackFlashBrothers" class="logo">
+      </a>
+      <button class="menu-toggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="shop.html">Shop</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html" class="active">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <section class="page-header">
+    <div class="container">
+      <h1>Get In Touch</h1>
+      <p>Interested in a camera? Have a question? We'd love to hear from you.</p>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="section">
+    <div class="container">
+      <div class="contact-layout">
+
+        <form class="contact-form" id="contact-form">
+          <div>
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" placeholder="Your name" required>
+          </div>
+          <div>
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="you@email.com" required>
+          </div>
+          <div>
+            <label for="message">Message</label>
+            <textarea id="message" name="message" placeholder="What camera are you interested in? Or just say hey." required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Send Message</button>
+          <p id="form-status" style="margin-top: 16px; font-family: 'Space Mono', monospace; font-size: 0.85rem;"></p>
+        </form>
+
+        <div class="contact-info">
+          <h3>Other Ways to Reach Us</h3>
+          <p>We usually respond within 24 hours. If you're asking about a specific camera, mention the model and we'll send you all the details.</p>
+
+          <div class="contact-detail">
+            <span class="label">Email</span>
+            <a href="mailto:hello@backflashbrothers.com">hello@backflashbrothers.com</a>
+          </div>
+
+          <div class="contact-detail">
+            <span class="label">Instagram</span>
+            <a href="https://instagram.com/backflashbrothers" target="_blank" rel="noopener">@backflashbrothers</a>
+          </div>
+
+          <div class="contact-detail">
+            <span class="label">Location</span>
+            <span>San Antonio, TX</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 BackFlashBrothers &middot; San Antonio, TX</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
