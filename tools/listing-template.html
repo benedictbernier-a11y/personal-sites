@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Listing Generator — BackFlashBrothers</title>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;700&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --black: #1A1A1A;
+      --amber: #E25555;
+      --sienna: #C94444;
+      --cream: #F2EDDA;
+      --white: #FFFFFF;
+      --gray: #6B6B6B;
+      --light-gray: #E6E3D6;
+      --olive: #6B7A4E;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--cream);
+      color: var(--black);
+      line-height: 1.6;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .mono { font-family: 'Space Mono', monospace; }
+
+    .wrapper {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 40px 24px;
+    }
+
+    header {
+      margin-bottom: 32px;
+      border-bottom: 2px solid var(--light-gray);
+      padding-bottom: 16px;
+    }
+
+    header h1 { font-size: 1.8rem; }
+
+    header p {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--gray);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-top: 4px;
+    }
+
+    /* Form */
+    .form-section { margin-bottom: 24px; }
+
+    label {
+      display: block;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-size: 0.85rem;
+      margin-bottom: 6px;
+      color: var(--black);
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 10px 14px;
+      border: 2px solid var(--light-gray);
+      background: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      color: var(--black);
+      border-radius: 2px;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--amber);
+    }
+
+    textarea { min-height: 100px; resize: vertical; }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .photo-inputs { display: flex; flex-direction: column; gap: 8px; }
+
+    .photo-input-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .photo-input-row input { flex: 1; }
+
+    .photo-input-row .photo-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--gray);
+      min-width: 20px;
+    }
+
+    .photo-preview {
+      display: flex;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .photo-preview img {
+      max-height: 80px;
+      border-radius: 2px;
+      border: 1px solid var(--light-gray);
+    }
+
+    .hint {
+      font-size: 0.75rem;
+      color: var(--gray);
+      margin-top: 4px;
+    }
+
+    .btn {
+      display: inline-block;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 14px 32px;
+      border: none;
+      cursor: pointer;
+      font-size: 0.95rem;
+      background: var(--amber);
+      color: var(--white);
+      border-radius: 2px;
+      margin-top: 8px;
+    }
+
+    .btn:hover { background: var(--sienna); }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--black);
+      border: 2px solid var(--light-gray);
+      padding: 8px 16px;
+      font-size: 0.8rem;
+    }
+
+    .btn-outline:hover { border-color: var(--amber); }
+
+    /* Output */
+    #output { display: none; margin-top: 40px; }
+
+    .output-block {
+      background: var(--white);
+      border-radius: 4px;
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+
+    .output-block h3 {
+      font-size: 1.1rem;
+      margin-bottom: 4px;
+    }
+
+    .output-block .output-desc {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--gray);
+      margin-bottom: 16px;
+    }
+
+    .output-content {
+      background: var(--cream);
+      padding: 16px;
+      border-radius: 2px;
+      font-size: 0.9rem;
+      line-height: 1.7;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      position: relative;
+    }
+
+    .output-content.html-output {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      line-height: 1.5;
+    }
+
+    .copy-btn {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: var(--black);
+      color: var(--cream);
+      border: none;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 4px 10px;
+      border-radius: 2px;
+      cursor: pointer;
+    }
+
+    .copy-btn:hover { background: var(--amber); }
+
+    .preview-section {
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid var(--light-gray);
+    }
+
+    .preview-section h4 {
+      font-size: 0.85rem;
+      margin-bottom: 12px;
+      color: var(--gray);
+    }
+
+    /* Card preview */
+    .preview-card {
+      background: var(--white);
+      border-radius: 4px;
+      overflow: hidden;
+      max-width: 320px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    .preview-card .card-img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: var(--light-gray);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gray);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.85rem;
+      overflow: hidden;
+    }
+
+    .preview-card .card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .preview-card .card-body { padding: 20px; }
+
+    .preview-card .badge {
+      display: inline-block;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 4px 10px;
+      border-radius: 2px;
+      background: var(--olive);
+      color: var(--cream);
+    }
+
+    .preview-card .card-model {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .preview-card .card-condition {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--amber);
+      margin: 6px 0 12px;
+    }
+
+    .preview-card .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 16px;
+    }
+
+    .preview-card .card-price {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    .preview-card .card-buy {
+      display: inline-block;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 14px 32px;
+      background: var(--amber);
+      color: var(--white);
+      font-size: 0.95rem;
+      border-radius: 0;
+      border: none;
+    }
+
+    @media (max-width: 600px) {
+      .form-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="wrapper">
+  <header>
+    <h1>Listing Generator</h1>
+    <p>Internal tool — fill in camera details, get listing copy + HTML</p>
+  </header>
+
+  <form id="listing-form">
+    <div class="form-section">
+      <div class="form-row">
+        <div>
+          <label for="model">Camera Model</label>
+          <select id="model">
+            <option value="">Select model...</option>
+            <option value="Nikon FE">Nikon FE</option>
+            <option value="Nikon FM">Nikon FM</option>
+            <option value="Nikon F2">Nikon F2</option>
+          </select>
+        </div>
+        <div>
+          <label for="price">Price ($)</label>
+          <input type="number" id="price" placeholder="120" min="1">
+        </div>
+      </div>
+    </div>
+
+    <div class="form-section">
+      <div class="form-row">
+        <div>
+          <label for="condition">Condition Rating</label>
+          <select id="condition">
+            <option value="Excellent">Excellent</option>
+            <option value="Good">Good</option>
+            <option value="Fair">Fair</option>
+          </select>
+        </div>
+        <div>
+          <label for="serial">Serial # (optional)</label>
+          <input type="text" id="serial" placeholder="e.g. 3456789">
+        </div>
+      </div>
+    </div>
+
+    <div class="form-section">
+      <label for="works">What works</label>
+      <textarea id="works" placeholder="e.g. All shutter speeds accurate, meter working, clean viewfinder"></textarea>
+    </div>
+
+    <div class="form-section">
+      <label for="repaired">What was repaired</label>
+      <textarea id="repaired" placeholder="e.g. Replaced light seals, cleaned mirror, recalibrated meter"></textarea>
+    </div>
+
+    <div class="form-section">
+      <label for="cosmetic">Cosmetic notes</label>
+      <textarea id="cosmetic" placeholder="e.g. Light brassing on edges, small scratch on bottom plate, clean prism"></textarea>
+    </div>
+
+    <div class="form-section">
+      <label>Photos (filenames or URLs)</label>
+      <p class="hint">Enter the image filename (e.g. nikon-fe-001.jpg) or full URL for each photo</p>
+      <div class="photo-inputs">
+        <div class="photo-input-row">
+          <span class="photo-label">1</span>
+          <input type="text" class="photo-url" placeholder="nikon-fe-001.jpg">
+        </div>
+        <div class="photo-input-row">
+          <span class="photo-label">2</span>
+          <input type="text" class="photo-url" placeholder="nikon-fe-002.jpg (optional)">
+        </div>
+        <div class="photo-input-row">
+          <span class="photo-label">3</span>
+          <input type="text" class="photo-url" placeholder="nikon-fe-003.jpg (optional)">
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" class="btn">Generate Listing</button>
+  </form>
+
+  <div id="output">
+    <h2 style="margin-bottom: 24px;">Generated Listing</h2>
+
+    <!-- Website Description -->
+    <div class="output-block">
+      <h3>Website Description</h3>
+      <p class="output-desc">Copy for the shop page or product detail</p>
+      <div class="output-content" id="out-description">
+        <button class="copy-btn" onclick="copyText('out-description')">Copy</button>
+      </div>
+    </div>
+
+    <!-- Instagram Caption -->
+    <div class="output-block">
+      <h3>Instagram Caption</h3>
+      <p class="output-desc">Ready to paste into IG</p>
+      <div class="output-content" id="out-instagram">
+        <button class="copy-btn" onclick="copyText('out-instagram')">Copy</button>
+      </div>
+    </div>
+
+    <!-- Shop HTML -->
+    <div class="output-block">
+      <h3>Shop Page HTML</h3>
+      <p class="output-desc">Paste inside the shop-grid div in shop.html</p>
+      <div class="output-content html-output" id="out-html">
+        <button class="copy-btn" onclick="copyText('out-html')">Copy</button>
+      </div>
+      <div class="preview-section">
+        <h4>Card Preview</h4>
+        <div class="preview-card" id="card-preview"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const form = document.getElementById('listing-form');
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const model = document.getElementById('model').value;
+    const price = document.getElementById('price').value;
+    const condition = document.getElementById('condition').value;
+    const serial = document.getElementById('serial').value.trim();
+    const works = document.getElementById('works').value.trim();
+    const repaired = document.getElementById('repaired').value.trim();
+    const cosmetic = document.getElementById('cosmetic').value.trim();
+
+    if (!model || !price) {
+      alert('Model and price are required.');
+      return;
+    }
+
+    const photos = [];
+    document.querySelectorAll('.photo-url').forEach(function(input) {
+      if (input.value.trim()) photos.push(input.value.trim());
+    });
+
+    // Build website description
+    const descParts = [];
+    descParts.push(model + (serial ? ' (S/N ' + serial + ')' : ''));
+    descParts.push('Condition: ' + condition);
+    descParts.push('Price: $' + price);
+    descParts.push('');
+    if (works) descParts.push('Tested & Working:\n' + works);
+    if (repaired) descParts.push('\nRepairs Performed:\n' + repaired);
+    if (cosmetic) descParts.push('\nCosmetic Notes:\n' + cosmetic);
+    descParts.push('\nEvery camera is tested with a roll of film before listing. Ships within 2 business days.');
+
+    const description = descParts.join('\n');
+
+    // Build Instagram caption
+    const igParts = [];
+    igParts.push('JUST LISTED: ' + model + ' — $' + price);
+    igParts.push('');
+    igParts.push('Condition: ' + condition);
+    if (works) igParts.push(works);
+    if (cosmetic) igParts.push(cosmetic);
+    igParts.push('');
+    igParts.push('Repaired, tested, and ready to shoot.');
+    igParts.push('DM to buy or link in bio.');
+    igParts.push('');
+    igParts.push('#backflashbrothers #filmcamera #' + model.replace(/\s+/g, '').toLowerCase() + ' #shootfilm #35mm #filmisnotdead #filmphotography #vintagecamera #nikon #sanantonio');
+
+    const instagram = igParts.join('\n');
+
+    // Build shop page HTML
+    const photoSrc = photos.length > 0 ? photos[0] : '';
+    const imgContent = photoSrc
+      ? '<img src="' + escapeHtml(photoSrc) + '" alt="' + escapeHtml(model) + '" style="width:100%;height:100%;object-fit:cover;">'
+      : '[ camera photo ]';
+
+    const htmlSnippet =
+      '<div class="camera-card">\n' +
+      '  <div class="card-img">' + imgContent + '</div>\n' +
+      '  <div class="card-body">\n' +
+      '    <span class="badge badge-available">Available</span>\n' +
+      '    <div class="card-model">' + escapeHtml(model) + '</div>\n' +
+      '    <div class="card-condition">' + escapeHtml(condition) + '</div>\n' +
+      '    <div class="card-footer">\n' +
+      '      <span class="card-price">$' + escapeHtml(price) + '</span>\n' +
+      '      <button class="btn btn-primary buy-btn" data-camera="' + escapeHtml(model) + '" data-price="$' + escapeHtml(price) + '">Buy</button>\n' +
+      '    </div>\n' +
+      '  </div>\n' +
+      '</div>';
+
+    // Render outputs
+    document.getElementById('out-description').innerHTML =
+      '<button class="copy-btn" onclick="copyText(\'out-description\')">Copy</button>' + escapeHtml(description);
+
+    document.getElementById('out-instagram').innerHTML =
+      '<button class="copy-btn" onclick="copyText(\'out-instagram\')">Copy</button>' + escapeHtml(instagram);
+
+    document.getElementById('out-html').innerHTML =
+      '<button class="copy-btn" onclick="copyText(\'out-html\')">Copy</button>' + escapeHtml(htmlSnippet);
+
+    // Render card preview
+    const preview = document.getElementById('card-preview');
+    const previewImg = photoSrc
+      ? '<img src="' + escapeHtml(photoSrc) + '" alt="' + escapeHtml(model) + '">'
+      : '[ camera photo ]';
+
+    preview.innerHTML =
+      '<div class="card-img">' + previewImg + '</div>' +
+      '<div class="card-body">' +
+      '  <span class="badge">Available</span>' +
+      '  <div class="card-model">' + escapeHtml(model) + '</div>' +
+      '  <div class="card-condition">' + escapeHtml(condition) + '</div>' +
+      '  <div class="card-footer">' +
+      '    <span class="card-price">$' + escapeHtml(price) + '</span>' +
+      '    <span class="card-buy">Buy</span>' +
+      '  </div>' +
+      '</div>';
+
+    document.getElementById('output').style.display = 'block';
+    document.getElementById('output').scrollIntoView({ behavior: 'smooth' });
+  });
+
+  function escapeHtml(str) {
+    const div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+  }
+
+  function copyText(id) {
+    const el = document.getElementById(id);
+    // Get text content excluding the copy button
+    const clone = el.cloneNode(true);
+    const btn = clone.querySelector('.copy-btn');
+    if (btn) btn.remove();
+    const text = clone.textContent;
+
+    navigator.clipboard.writeText(text).then(function() {
+      const copyBtn = el.querySelector('.copy-btn');
+      copyBtn.textContent = 'Copied!';
+      setTimeout(function() { copyBtn.textContent = 'Copy'; }, 1500);
+    });
+  }
+</script>
+
+</body>
+</html>
